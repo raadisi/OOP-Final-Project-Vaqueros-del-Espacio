@@ -12,7 +12,21 @@ public class Medic extends CrewMember{
         // hi calu you've got this one
         // remember to refer to the doc sent way up at the start of the whatsapp group for stats
 
-        // this return value is a placeholder
+        int energy = this.getEnergy();
+        if (energy >= 5) {
+            // formula: scientific ability (7) + 2
+            int healing = 7 + 2;
+
+            // placeholder for MissionControl integration
+            // CrewMember patient = MissionControl.getLowestResilienceCrew();
+            // if (patient != null) { patient.restoreResilience(healing); }
+
+            this.setEnergy(energy - 5);
+            this.addExperience(6);
+
+            return healing;
+        }
+
         return 0;
     }
 }

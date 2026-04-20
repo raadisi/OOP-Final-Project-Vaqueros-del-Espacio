@@ -53,4 +53,8 @@ public abstract class CrewMember {
         this.experience += amount;
         // for later... maybe; we can make leveling up have advantages by coding those in here
     }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
 }

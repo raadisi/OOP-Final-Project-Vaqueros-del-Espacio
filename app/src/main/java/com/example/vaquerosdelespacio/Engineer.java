@@ -12,7 +12,20 @@ public class Engineer extends CrewMember{
         // hi calu you've got this one
         // remember to refer to the doc sent way up at the start of the whatsapp group for stats
 
-        // this return value is a placeholder
+        int energy = this.getEnergy();
+        if (energy >= 4) {
+            // formula: technical skills (10) * 2
+            int repairAmount = 10 * 2;
+
+            // placeholder for MissionControl integration
+            // MissionControl.repairShip(repairAmount);
+
+            this.setEnergy(energy - 4);
+            this.addExperience(4);
+
+            return repairAmount;
+        }
+
         return 0;
     }
 }

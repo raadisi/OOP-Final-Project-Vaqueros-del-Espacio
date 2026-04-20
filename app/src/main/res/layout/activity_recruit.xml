@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="16dp">
+
+    <EditText android:id="@+id/editCrewName" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="Vaquero Name" />
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Pilot" android:onClick="recruitPilot"/>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Medic" android:onClick="recruitMedic"/>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Engineer" android:onClick="recruitEngineer"/>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Scientist" android:onClick="recruitScientist"/>
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Security" android:onClick="recruitSecurity"/>
+</LinearLayout>

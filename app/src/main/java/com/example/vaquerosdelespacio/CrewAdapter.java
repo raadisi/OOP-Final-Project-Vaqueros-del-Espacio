@@ -1,62 +1,51 @@
 package com.example.vaquerosdelespacio;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.CrewViewHolder> {
 
-    private RecyclerView recyclerView;
-    private CrewAdapter adapter;
+    private ArrayList<CrewMember> crewList;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // linking the recyclerview to the UI element Iv is creating
-        recyclerView = findViewById(R.id.rvCrewList);
-
-        // setting the layout manager to a standard vertical list
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    public CrewAdapter(ArrayList<CrewMember> crewList) {
+        this.crewList = crewList;
     }
 
-    // this runs every time we return to the home screen
+    @NonNull
     @Override
-    protected void onResume() {
-        super.onResume();
+    public CrewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // this links to Iv's item_crew.xml
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_crew, parent, false);
+        return new CrewViewHolder(view);
+    }
 
-        // since the quarters is a safe area, we loop through and restore everyone's energy
-        for (CrewMember member : Storage.getInstance().getCrewList()) {
-            member.restoreEnergy();
+    @Override
+    public void onBindViewHolder(@NonNull CrewViewHolder holder, int position) {
+        CrewMember member = crewList.get(position);
+
+        // setting the name and details from the crewmember object
+        holder.name.setText(member.getName());
+        holder.details.setText("Energy: " + member.getEnergy() + " | XP: " + member.getExperience());
+    }
+
+    @Override
+    public int getItemCount() {
+        return crewList.size();
+    }
+
+    public static class CrewViewHolder extends RecyclerView.ViewHolder {
+        TextView name, details;
+
+        public CrewViewHolder(@NonNull View itemView) {
+            super(itemView);
+            // linking to the IDs Iv provided in her XML
+            name = itemView.findViewById(R.id.textCrewName);
+            details = itemView.findViewById(R.id.textCrewDetails);
         }
-
-        // we check if anyone didn't make it back alive before updating the list
-        Storage.getInstance().removeDeadCrew();
-
-        // here we refresh the adapter to show new recruits or updated stats
-        adapter = new CrewAdapter(Storage.getInstance().getCrewList());
-        recyclerView.setAdapter(adapter);
-    }
-
-    // navigation logic for the recruitment center
-    public void openRecruit(View view) {
-        Intent intent = new Intent(this, RecruitmentActivity.class);
-        startActivity(intent);
-    }
-
-    // navigation logic for starting a mission
-    public void openMission(View view) {
-        Intent intent = new Intent(this, MissionActivity.class);
-        startActivity(intent);
-    }
-
-    // navigation logic for the training simulator
-    public void openSimulator(View view) {
-        Intent intent = new Intent(this, SimulatorActivity.class);
-        startActivity(intent);
     }
 }
