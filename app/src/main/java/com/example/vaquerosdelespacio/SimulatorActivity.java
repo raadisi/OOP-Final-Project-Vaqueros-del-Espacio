@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import com.example.vaquerosdelespacio.R;
 
 public class SimulatorActivity extends AppCompatActivity {
 

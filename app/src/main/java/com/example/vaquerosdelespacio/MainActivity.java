@@ -38,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * this method will be linked to the 'Sim' button.
+     * Added this to fix the crash!
+     */
+    public void openSimulator(View view) {
+        Intent intent = new Intent(this, SimulatorActivity.class);
+        startActivity(intent);
+    }
+
+    /**
      * healing in the quarters
      * the quarters is a safe area where energy restores
      * we can run this whenever the user returns to the Main Screen.
